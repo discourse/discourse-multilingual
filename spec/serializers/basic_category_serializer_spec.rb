@@ -5,13 +5,9 @@ describe BasicCategorySerializer do
   fab!(:user) { Fabricate(:user, admin: false) }
   let(:guardian) { Guardian.new(user) }
 
-  before_all do
-    Site.clear_cache
-  end
+  before_all { Site.clear_cache }
 
-  after do
-    Site.clear_cache
-  end
+  after { Site.clear_cache }
 
   it "serializes without error when there are no translations but a set locale" do
     user.locale = "en_GB"
@@ -31,7 +27,9 @@ describe BasicCategorySerializer do
       file_type: "category_name",
       locale: "wbp",
       file_ext: "yml",
-      translation_data: { category.slug => "pardu-pardu-mani" }
+      translation_data: {
+        category.slug => "pardu-pardu-mani",
+      },
     )
     user.locale = "wbp"
     serialized = described_class.new(category, scope: guardian, root: false).as_json
@@ -44,7 +42,9 @@ describe BasicCategorySerializer do
       file_type: "category_name",
       locale: "wbp",
       file_ext: "yml",
-      translation_data: { category.slug => "pardu-pardu-mani" }
+      translation_data: {
+        category.slug => "pardu-pardu-mani",
+      },
     )
     user.locale = nil
     serialized = described_class.new(category, scope: guardian, root: false).as_json

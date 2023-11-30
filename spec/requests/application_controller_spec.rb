@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require_relative '../plugin_helper'
+require_relative "../plugin_helper"
 
 describe ApplicationController do
   before do
@@ -13,21 +13,21 @@ describe ApplicationController do
   it "allows locale to be set via query params" do
     get "/bootstrap.json?locale=fr"
     expect(response.status).to eq(200)
-    expect(response.parsed_body['bootstrap']['locale_script']).to end_with("fr.js")
+    expect(response.parsed_body["bootstrap"]["locale_script"]).to end_with("fr.js")
   end
 
   it "allows locale to be set via a cookie" do
     cookies[:discourse_locale] = "fr"
     get "/bootstrap.json"
     expect(response.status).to eq(200)
-    expect(response.parsed_body['bootstrap']['locale_script']).to end_with("fr.js")
+    expect(response.parsed_body["bootstrap"]["locale_script"]).to end_with("fr.js")
   end
 
   it "doesnt leak after requests" do
     cookies[:discourse_locale] = "fr"
     get "/bootstrap.json"
     expect(response.status).to eq(200)
-    expect(response.parsed_body['bootstrap']['locale_script']).to end_with("fr.js")
+    expect(response.parsed_body["bootstrap"]["locale_script"]).to end_with("fr.js")
     expect(I18n.locale.to_s).to eq(SiteSettings::DefaultsProvider::DEFAULT_LOCALE)
   end
 end

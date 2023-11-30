@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 ## The plugin store is not wiped between each test
 
-require 'webmock/rspec'
+require "webmock/rspec"
 
 RSpec.configure do |config|
   config.around(:each) do |example|
@@ -12,4 +12,4 @@ RSpec.configure do |config|
   end
 end
 
-require 'rails_helper'
+require "rails_helper"

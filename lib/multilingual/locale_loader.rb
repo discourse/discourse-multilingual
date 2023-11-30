@@ -29,10 +29,10 @@ class ::Multilingual::LocaleLoader
   end
 
   def preload_custom_locale
-    preload_script_url(ExtraLocalesController.url('custom-language'))
+    preload_script_url(ExtraLocalesController.url("custom-language"))
   end
 
   def preload_tag_translations
-    preload_script_url(ExtraLocalesController.url('tags'))
+    preload_script_url(ExtraLocalesController.url("tags"))
   end
 end
