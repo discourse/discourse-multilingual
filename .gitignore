@@ -3,8 +3,6 @@ coverage/*
 gems/
 .bundle/
 auto_generated
-.DS_Store
 node_modules/
 config/translations/
 assets/locales/
-yarn.lock
