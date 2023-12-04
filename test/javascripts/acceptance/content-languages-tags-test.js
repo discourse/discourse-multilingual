@@ -1,7 +1,7 @@
-import { acceptance } from "discourse/tests/helpers/qunit-helpers";
-import { test } from "qunit";
-import { topicList } from "../fixtures/topic-list";
 import { visit } from "@ember/test-helpers";
+import { test } from "qunit";
+import { acceptance } from "discourse/tests/helpers/qunit-helpers";
+import { topicList } from "../fixtures/topic-list";
 
 const content_languages = [{ locale: "aa", name: "Qafár af" }];
 
@@ -20,9 +20,6 @@ acceptance("Content language tags", function (needs) {
 
   test("displays content language tags correctly", async (assert) => {
     await visit("/");
-    assert.equal(
-      find(`.content-language-tags .discourse-tag:eq(0)`).text(),
-      "Qafár af"
-    );
+    assert.dom(".content-language-tags .discourse-tag").hasText("Qafár af");
   });
 });

@@ -15,7 +15,10 @@
     {{#if language.content_tag_conflict}}
       {{#link-to "tag.show" language.locale}}
         {{d-icon "warning"}}
-        <span>{{i18n "multilingual.languages.content_tag_conflict" tagName=language.locale}}</span>
+        <span>{{i18n
+            "multilingual.languages.content_tag_conflict"
+            tagName=language.locale
+          }}</span>
       {{/link-to}}
     {{else}}
       {{i18n "multilingual.languages.disabled"}}
@@ -30,7 +33,11 @@
     {{i18n "multilingual.languages.disabled"}}
   {{else}}
     {{#if language.interface_supported}}
-      {{input type="checkbox" checked=language.interface_enabled disabled=interfaceToggleDisabled}}
+      {{input
+        type="checkbox"
+        checked=language.interface_enabled
+        disabled=interfaceToggleDisabled
+      }}
     {{else}}
       <i>{{i18n "multilingual.languages.interface_not_supported"}}</i>
     {{/if}}

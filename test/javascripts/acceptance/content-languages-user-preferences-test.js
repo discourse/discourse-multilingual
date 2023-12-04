@@ -1,10 +1,10 @@
+import { click, visit } from "@ember/test-helpers";
+import { test } from "qunit";
 import {
   acceptance,
   exists,
   loggedInUser,
 } from "discourse/tests/helpers/qunit-helpers";
-import { click, visit } from "@ember/test-helpers";
-import { test } from "qunit";
 
 const content_languages = [
   { locale: "aa", name: "Qafár af" },
@@ -47,11 +47,9 @@ acceptance(
 
       await click(".content-languages-selector summary");
 
-      assert.equal(
-        find(".content-languages-selector .select-kit-collection li").length,
-        2,
-        "displays the content languages"
-      );
+      assert
+        .dom(".content-languages-selector .select-kit-collection li")
+        .exists({ count: 2 }, "displays the content languages");
     });
   }
 );

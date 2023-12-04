@@ -1,21 +1,21 @@
+import { computed, set } from "@ember/object";
+import { schedule } from "@ember/runloop";
+import $ from "jquery";
 import { withPluginApi } from "discourse/lib/plugin-api";
+import renderTag from "discourse/lib/render-tag";
+import Composer from "discourse/models/composer";
+import { iconHTML } from "discourse-common/lib/icon-library";
 import { default as discourseComputed } from "discourse-common/utils/decorators";
-import {
-  multilingualTagRenderer,
-  multilingualTagTranslator,
-} from "../lib/multilingual-tag";
+import { isContentLanguage } from "../lib/multilingual";
 import {
   discoveryParams,
   localeParam,
   removeParam,
 } from "../lib/multilingual-route";
-import { isContentLanguage } from "../lib/multilingual";
-import Composer from "discourse/models/composer";
-import { iconHTML } from "discourse-common/lib/icon-library";
-import renderTag from "discourse/lib/render-tag";
-import { computed, set } from "@ember/object";
-import { scheduleOnce } from "@ember/runloop";
-import jQuery from "jquery";
+import {
+  multilingualTagRenderer,
+  multilingualTagTranslator,
+} from "../lib/multilingual-tag";
 
 export default {
   name: "multilingual",
@@ -196,7 +196,7 @@ export default {
       ) {
         api.reopenWidget("header", {
           defaultState() {
-            return jQuery.extend(this._super(...arguments), {
+            return $.extend(this._super(...arguments), {
               languageSwitcherMenuVisible: false,
             });
           },
@@ -247,7 +247,7 @@ export default {
         pluginId: "discourse-multilingual",
 
         setupContentTagControls() {
-          scheduleOnce("afterRender", () => {
+          schedule("afterRender", () => {
             $(".tag-groups-container").addClass("content-tags");
             $(".tag-group-content h1 input").prop("disabled", true);
             $(".content-tag-controls").appendTo(".tag-group-content");

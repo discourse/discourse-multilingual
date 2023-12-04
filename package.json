@@ -1,10 +1,13 @@
 {
   "name": "discourse-multilingual",
   "version": "1.0.0",
-  "repository": "git@github.com:paviliondev/discourse-multilingual.git",
+  "repository": "https://github.com/discourse/discourse-multilingual",
   "author": "Pavilion",
-  "license": "GPL V2",
+  "license": "GPL-2.0-only",
   "devDependencies": {
-    "eslint-config-discourse": "^3.2.0"
+    "@discourse/lint-configs": "^1.2.0",
+    "ember-template-lint": "^5.13.0",
+    "eslint": "^8.54.0",
+    "prettier": "^2.8.8"
   }
 }
