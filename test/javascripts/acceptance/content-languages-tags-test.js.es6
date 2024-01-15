@@ -20,9 +20,6 @@ acceptance("Content language tags", function (needs) {
 
   test("displays content language tags correctly", async (assert) => {
     await visit("/");
-    assert.equal(
-      find(`.content-language-tags .discourse-tag:eq(0)`).text(),
-      "Qafár af"
-    );
+    assert.dom(`.content-language-tags .discourse-tag`).hasText("Qafár af");
   });
 });
