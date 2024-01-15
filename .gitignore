@@ -7,4 +7,3 @@ auto_generated
 node_modules/
 config/translations/
 assets/locales/
-yarn.lock
