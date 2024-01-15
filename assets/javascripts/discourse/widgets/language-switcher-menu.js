@@ -1,8 +1,9 @@
 import { later } from "@ember/runloop";
-import { createWidget } from "discourse/widgets/widget";
+import $ from "jquery";
 import { h } from "virtual-dom";
-import { addParam, localeParam } from "../lib/multilingual-route";
+import { createWidget } from "discourse/widgets/widget";
 import I18n from "I18n";
+import { addParam, localeParam } from "../lib/multilingual-route";
 
 export default createWidget("language-switcher-menu", {
   tagName: "div.language-switcher-menu",
@@ -61,7 +62,7 @@ export default createWidget("language-switcher-menu", {
       $centeredElement.parents(".panel").length &&
       !$centeredElement.hasClass("header-cloak")
     ) {
-      this.sendWidgetAction("toggleLangugeSwitcherMenu");
+      this.sendWidgetAction("toggleLanguageSwitcherMenu");
     } else {
       const $window = $(window);
       const windowWidth = $window.width();
@@ -71,7 +72,7 @@ export default createWidget("language-switcher-menu", {
       const $headerCloak = $(".header-cloak");
       $headerCloak.addClass("animate");
       $headerCloak.css("opacity", 0);
-      later(() => this.sendWidgetAction("toggleLangugeSwitcherMenu"), 200);
+      later(() => this.sendWidgetAction("toggleLanguageSwitcherMenu"), 200);
     }
   },
 
@@ -79,7 +80,7 @@ export default createWidget("language-switcher-menu", {
     if (this.site.mobileView) {
       this.clickOutsideMobile(e);
     } else {
-      this.sendWidgetAction("toggleLangugeSwitcherMenu");
+      this.sendWidgetAction("toggleLanguageSwitcherMenu");
     }
   },
 });

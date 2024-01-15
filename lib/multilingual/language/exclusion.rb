@@ -28,7 +28,7 @@ class Multilingual::LanguageExclusion
     if enabled
       exclusions.delete(locale)
     else
-      exclusions.push(locale) unless (exclusions.include?(locale) || locale == 'en')
+      exclusions.push(locale) unless (exclusions.include?(locale) || locale == "en")
     end
 
     data = all_uncached

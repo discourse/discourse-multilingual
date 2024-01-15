@@ -5,18 +5,11 @@ describe SiteSerializer do
   fab!(:user) { Fabricate(:user, admin: false) }
   let(:guardian) { Guardian.new(user) }
 
-  before_all do
-    Site.clear_cache
-  end
-
-  after do
-    Site.clear_cache
-  end
+  before { Site.clear_cache }
+  after { Site.clear_cache }
 
   context "when plugin is enabled" do
-    before do
-      SiteSetting.multilingual_enabled = true
-    end
+    before { SiteSetting.multilingual_enabled = true }
 
     it "serializes without error when there are no translations but a set locale" do
       user.locale = "en_GB"
@@ -38,7 +31,9 @@ describe SiteSerializer do
         file_type: "category_name",
         locale: "wbp",
         file_ext: "yml",
-        translation_data: { category.slug => "pardu-pardu-mani" }
+        translation_data: {
+          category.slug => "pardu-pardu-mani",
+        },
       )
       user.locale = "wbp"
       serialized = described_class.new(Site.new(guardian), scope: guardian, root: false).as_json
@@ -53,7 +48,9 @@ describe SiteSerializer do
         file_type: "category_name",
         locale: "wbp",
         file_ext: "yml",
-        translation_data: { category.slug => "pardu-pardu-mani" }
+        translation_data: {
+          category.slug => "pardu-pardu-mani",
+        },
       )
       user.locale = nil
       serialized = described_class.new(Site.new(guardian), scope: guardian, root: false).as_json
@@ -64,9 +61,7 @@ describe SiteSerializer do
   end
 
   context "when plugin is disabled" do
-    before do
-      SiteSetting.multilingual_enabled = false
-    end
+    before { SiteSetting.multilingual_enabled = false }
 
     it "serializes Categories even when plugin is disabled" do
       serialized = described_class.new(Site.new(guardian), scope: guardian, root: false).as_json
@@ -80,7 +75,9 @@ describe SiteSerializer do
         file_type: "category_name",
         locale: "wbp",
         file_ext: "yml",
-        translation_data: { category.slug => "pardu-pardu-mani" }
+        translation_data: {
+          category.slug => "pardu-pardu-mani",
+        },
       )
       user.locale = "wbp"
       serialized = described_class.new(Site.new(guardian), scope: guardian, root: false).as_json

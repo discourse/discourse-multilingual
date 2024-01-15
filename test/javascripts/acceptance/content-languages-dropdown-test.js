@@ -1,10 +1,10 @@
+import { click, visit } from "@ember/test-helpers";
+import { test } from "qunit";
 import {
   acceptance,
   exists,
   updateCurrentUser,
 } from "discourse/tests/helpers/qunit-helpers";
-import { test } from "qunit";
-import { click, visit } from "@ember/test-helpers";
 
 const content_languages = [{ locale: "aa", name: "Qafár af" }];
 
