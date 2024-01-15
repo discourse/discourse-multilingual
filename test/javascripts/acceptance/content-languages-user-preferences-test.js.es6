@@ -47,11 +47,9 @@ acceptance(
 
       await click(".content-languages-selector summary");
 
-      assert.equal(
-        find(".content-languages-selector .select-kit-collection li").length,
-        2,
-        "displays the content languages"
-      );
+      assert
+        .dom(".content-languages-selector .select-kit-collection li")
+        .exists({ count: 2 }, "displays the content languages");
     });
   }
 );
