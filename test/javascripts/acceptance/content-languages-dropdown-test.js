@@ -1,10 +1,10 @@
+import { click, visit } from "@ember/test-helpers";
+import { test } from "qunit";
 import {
   acceptance,
   exists,
   updateCurrentUser,
 } from "discourse/tests/helpers/qunit-helpers";
-import { test } from "qunit";
-import { click, visit } from "@ember/test-helpers";
 
 const content_languages = [{ locale: "aa", name: "Qafár af" }];
 
@@ -44,19 +44,18 @@ acceptance(
 
       assert.ok(exists(".content-languages-dropdown"), "displays");
 
-      assert.equal(
-        find(".content-languages-dropdown summary").hasClass("has-languages"),
-        true,
-        "has content languages"
-      );
+      assert
+        .dom(".content-languages-dropdown summary")
+        .hasClass("has-languages", "has content languages");
 
       await click(".content-languages-dropdown summary");
 
-      assert.equal(
-        find(".content-languages-dropdown .select-kit-collection li").length,
-        2,
-        "should render content languages and the set languages link"
-      );
+      assert
+        .dom(".content-languages-dropdown .select-kit-collection li")
+        .exists(
+          { count: 2 },
+          "should render content languages and the set languages link"
+        );
     });
   }
 );

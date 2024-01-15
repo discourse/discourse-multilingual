@@ -2,7 +2,8 @@
   {{content-tag-groups-form
     model=model
     onDestroy=(action "onDestroy")
-    tagsChanged=(route-action "tagsChanged")}}
+    tagsChanged=(route-action "tagsChanged")
+  }}
 {{else}}
   {{tag-groups-form model=model onDestroy=(action "onDestroy")}}
 {{/if}}

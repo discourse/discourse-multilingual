@@ -1,7 +1,7 @@
-import { alias } from "@ember/object/computed";
 import Component from "@ember/component";
-import UppyUploadMixin from "discourse/mixins/uppy-upload";
+import { alias } from "@ember/object/computed";
 import { on } from "@ember/object/evented";
+import UppyUploadMixin from "discourse/mixins/uppy-upload";
 import { default as discourseComputed } from "discourse-common/utils/decorators";
 import I18n from "I18n";
 

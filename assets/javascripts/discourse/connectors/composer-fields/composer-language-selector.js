@@ -1,11 +1,12 @@
+import { schedule } from "@ember/runloop";
+import $ from "jquery";
 import { getOwner } from "discourse-common/lib/get-owner";
-import { scheduleOnce } from "@ember/runloop";
 
 function setupSelector(isFirstPost, ctx) {
   ctx.set("showSelector", isFirstPost);
 
   if (isFirstPost) {
-    scheduleOnce("afterRender", () => {
+    schedule("afterRender", () => {
       $(".content-languages-selector").appendTo(".title-and-category");
     });
   }

@@ -13,14 +13,16 @@
       id="multilingual-languages-uploader"
       uploading=uploading
       uploadType="language"
-      done=(action "languagesUploaded")}}
+      done=(action "languagesUploaded")
+    }}
 
     {{d-button
       action=(action "update")
       class="btn-primary"
       icon="save"
       label=updateState
-      disabled=updateLanguagesDisabled}}
+      disabled=updateLanguagesDisabled
+    }}
   </div>
 </div>
 
@@ -34,7 +36,8 @@
       order=order
       ascending=ascending
       updatedLanguages=updatedLanguages
-      updateLanguages=(action "updateLanguages")}}
+      updateLanguages=(action "updateLanguages")
+    }}
   {{else}}
     <p>{{i18n "search.no_results"}}</p>
   {{/if}}

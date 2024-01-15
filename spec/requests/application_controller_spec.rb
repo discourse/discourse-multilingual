@@ -29,7 +29,7 @@ describe ApplicationController do
     expect(locale_scripts(response.body)).to include("/assets/locales/fr.js")
   end
 
-  it "doesnt leak after requests" do
+  it "doesn't leak after requests" do
     get "/latest", headers: { Cookie: "discourse_locale=fr" }
     expect(response.status).to eq(200)
     expect(locale_scripts(response.body)).to include("/assets/locales/fr.js")

@@ -1,9 +1,9 @@
+import { set } from "@ember/object";
 import DropdownSelectBox from "select-kit/components/dropdown-select-box";
 import {
   contentLanguageParam,
   getDiscoveryParam,
 } from "../../discourse/lib/multilingual-route";
-import { set } from "@ember/object";
 
 export default DropdownSelectBox.extend({
   classNames: "content-languages-dropdown",
@@ -19,6 +19,7 @@ export default DropdownSelectBox.extend({
   },
 
   didInsertElement() {
+    this._super(...arguments);
     if (!this.currentUser) {
       this.selectKit.options.set("filterable", true);
     }

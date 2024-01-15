@@ -1,13 +1,16 @@
+import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import DiscourseRoute from "discourse/routes/discourse";
 
 export default DiscourseRoute.extend({
+  router: service(),
+
   beforeModel(transition) {
     if (
       transition.intent.url === "/admin/multilingual" ||
       transition.intent.name === "adminMultilingual"
     ) {
-      this.transitionTo("adminMultilingualLanguages");
+      this.router.transitionTo("adminMultilingualLanguages");
     }
   },
 
@@ -26,11 +29,13 @@ export default DiscourseRoute.extend({
   actions: {
     showSettings() {
       const controller = this.controllerFor("adminSiteSettings");
-      this.transitionTo("adminSiteSettingsCategory", "plugins").then(() => {
-        controller.set("filter", "multilingual");
-        controller.set("_skipBounce", true);
-        controller.filterContentNow("plugins");
-      });
+      this.router
+        .transitionTo("adminSiteSettingsCategory", "plugins")
+        .then(() => {
+          controller.set("filter", "multilingual");
+          controller.set("_skipBounce", true);
+          controller.filterContentNow("plugins");
+        });
     },
   },
 });

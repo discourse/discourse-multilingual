@@ -1,20 +1,18 @@
-import { getOwner } from "discourse-common/lib/get-owner";
 import { next } from "@ember/runloop";
-import DiscourseURL from "discourse/lib/url";
 import cookie from "discourse/lib/cookie";
+import DiscourseURL from "discourse/lib/url";
+import { getOwner } from "discourse-common/lib/get-owner";
 
 const contentLanguageParam = "content_languages";
 const localeParam = "locale";
 const discoveryParams = [contentLanguageParam];
 
 function getRouter(ctx) {
-  const router = getOwner(ctx).lookup("router:main");
-  return router;
+  return getOwner(ctx).lookup("service:router");
 }
 
 function getDiscoveryController(ctx) {
-  const controller = getOwner(ctx).lookup(`controller:discovery/topics`);
-  return controller;
+  return getOwner(ctx).lookup(`controller:discovery/topics`);
 }
 
 function getDiscoveryParam(ctx, paramName) {
@@ -26,8 +24,7 @@ function setDiscoveryParam(ctx, paramName, value) {
 }
 
 function getPath(ctx) {
-  const path = getRouter(ctx).currentURL.toString();
-  return path;
+  return getRouter(ctx).currentURL.toString();
 }
 
 function getParams(ctx, paramName = null) {
@@ -45,8 +42,8 @@ function buildPath(ctx, params) {
 
 function useDiscoveryController(ctx, paramName) {
   return (
-    getRouter(ctx).currentRouteName.indexOf("discovery") > -1 &&
-    discoveryParams.indexOf(paramName) > -1
+    getRouter(ctx).currentRouteName.includes("discovery") &&
+    discoveryParams.includes(paramName)
   );
 }
 
@@ -106,7 +103,6 @@ function removeParam(paramName, opts = {}) {
 }
 
 export {
-  getRouter,
   addParam,
   removeParam,
   getParams,
