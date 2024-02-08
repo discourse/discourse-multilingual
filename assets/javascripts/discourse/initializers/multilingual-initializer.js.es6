@@ -13,6 +13,7 @@ import { isContentLanguage } from "../lib/multilingual";
 import Composer from "discourse/models/composer";
 import { iconHTML } from "discourse-common/lib/icon-library";
 import renderTag from "discourse/lib/render-tag";
+import { inject as service } from "@ember/service";
 import { computed, set } from "@ember/object";
 import { scheduleOnce } from "@ember/runloop";
 import jQuery from "jquery";
@@ -20,8 +21,8 @@ import jQuery from "jquery";
 export default {
   name: "multilingual",
   initialize(container) {
-    const siteSettings = container.lookup("site-settings:main");
-    const currentUser = container.lookup("current-user:main");
+    const siteSettings = container.lookup("service:site-settings");
+    const currentUser = container.lookup("service:current-user");
 
     if (!siteSettings.multilingual_enabled) {
       return;
@@ -53,6 +54,9 @@ export default {
       api.modifyClass("controller:preferences/interface", {
         pluginId: "discourse-multilingual",
 
+        currentUser: service(),
+        siteSettings: service(),
+
         @discourseComputed()
         availableLocales() {
           return this.site.interface_languages.map((l) => {
@@ -72,7 +76,7 @@ export default {
 
         actions: {
           save() {
-            if (!siteSettings.multilingual_content_languages_enabled) {
+            if (!this.siteSettings.multilingual_content_languages_enabled) {
               return this._super();
             }
 
@@ -99,10 +103,10 @@ export default {
 
               // See workaround above
               userLanguages = userLanguages.filter(
-                (l) => l && isContentLanguage(l.locale, siteSettings)
+                (l) => l && isContentLanguage(l.locale, this.siteSettings)
               );
 
-              currentUser.set("content_languages", userLanguages);
+              this.currentUser.set("content_languages", userLanguages);
             });
           },
         },
@@ -111,11 +115,13 @@ export default {
       api.modifyClass("component:tag-drop", {
         pluginId: "discourse-multilingual",
 
+        siteSettings: service(),
+
         _prepareSearch(query) {
           const data = {
             q: query,
             filterForInput: true,
-            limit: this.get("siteSettings.max_tag_search_results"),
+            limit: this.siteSettings.max_tag_search_results,
           };
 
           this.searchTags("/tags/filter/search", data, this._transformJson);
@@ -201,7 +207,7 @@ export default {
             });
           },
 
-          toggleLangugeSwitcherMenu() {
+          toggleLanguageSwitcherMenu() {
             this.state.languageSwitcherMenuVisible =
               !this.state.languageSwitcherMenuVisible;
           },
@@ -212,7 +218,7 @@ export default {
             title: "user.locale.title",
             icon: "translate",
             iconId: "language-switcher-menu-button",
-            action: "toggleLangugeSwitcherMenu",
+            action: "toggleLanguageSwitcherMenu",
             active:
               helper.widget.parentWidget.state.languageSwitcherMenuVisible,
           });
