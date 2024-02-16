@@ -1,4 +1,3 @@
-import { later } from "@ember/runloop";
 import { createWidget } from "discourse/widgets/widget";
 import { h } from "virtual-dom";
 import { addParam, localeParam } from "../lib/multilingual-route";
@@ -49,37 +48,6 @@ export default createWidget("language-switcher-menu", {
   },
 
   html() {
-    return this.attach("menu-panel", {
-      maxWidth: this.settings.maxWidth,
-      contents: () => this.panelContents(),
-    });
-  },
-
-  clickOutsideMobile(e) {
-    const $centeredElement = $(document.elementFromPoint(e.clientX, e.clientY));
-    if (
-      $centeredElement.parents(".panel").length &&
-      !$centeredElement.hasClass("header-cloak")
-    ) {
-      this.sendWidgetAction("toggleLangugeSwitcherMenu");
-    } else {
-      const $window = $(window);
-      const windowWidth = $window.width();
-      const $panel = $(".menu-panel");
-      $panel.addClass("animate");
-      $panel.css("right", -windowWidth);
-      const $headerCloak = $(".header-cloak");
-      $headerCloak.addClass("animate");
-      $headerCloak.css("opacity", 0);
-      later(() => this.sendWidgetAction("toggleLangugeSwitcherMenu"), 200);
-    }
-  },
-
-  clickOutside(e) {
-    if (this.site.mobileView) {
-      this.clickOutsideMobile(e);
-    } else {
-      this.sendWidgetAction("toggleLangugeSwitcherMenu");
-    }
+    return this.panelContents();
   },
 });
