@@ -2,16 +2,12 @@
 class ::Multilingual::LocaleLoader
   attr_reader :controller
 
+  delegate :request, to: :controller
+  delegate :helpers, to: :controller, private: true
+  delegate :asset_path, to: :helpers
+
   def initialize(controller)
     @controller = controller
-  end
-
-  def request
-    @controller.request
-  end
-
-  def asset_path(url)
-    @controller.helpers.asset_path(url)
   end
 
   def current_locale
@@ -23,14 +19,14 @@ class ::Multilingual::LocaleLoader
   end
 
   def preload_i18n
-    @controller.helpers.preload_script("locales/i18n")
+    helpers.preload_script("locales/i18n")
   end
 
   def preload_custom_locale
-    @controller.helpers.preload_script_url(ExtraLocalesController.url("custom-language"))
+    helpers.preload_script_url(ExtraLocalesController.url("custom-language"))
   end
 
   def preload_tag_translations
-    @controller.helpers.preload_script_url(ExtraLocalesController.url("tags"))
+    helpers.preload_script_url(ExtraLocalesController.url("tags"))
   end
 end
