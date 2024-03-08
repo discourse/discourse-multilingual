@@ -25,6 +25,7 @@ export default class LanguageSwitcherMenu extends Component {
       <ul>
         {{#each this.site.interface_languages as |l|}}
           <li>
+            {{! template-lint-disable no-invalid-interactive }}
             <a
               class={{concatClass
                 "ls-language"
