@@ -58,8 +58,8 @@ after_initialize do
 
   ::I18n.singleton_class.prepend I18nMultilingualExtension
   ::JsLocaleHelper.singleton_class.prepend JsLocaleHelperMultilingualExtension
-  ::ExtraLocalesController.singleton_class.prepend ExtraLocalesControllerMultilingualClassExtension
-  ::ExtraLocalesController.prepend ExtraLocalesControllerMultilingualExtension
+  # ::ExtraLocalesController.singleton_class.prepend ExtraLocalesControllerMultilingualClassExtension
+  # ::ExtraLocalesController.prepend ExtraLocalesControllerMultilingualExtension
   ::TopicViewSerializer.prepend TopicSerializerMultilingualExtension
   ::TopicListItemSerializer.prepend TopicSerializerMultilingualExtension
   ::TagGroup.singleton_class.prepend TagGroupMultilingualExtension
